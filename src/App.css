@@ -1,11 +1,84 @@
-.App {
-  text-align: center;
+.nav-ul li{
+  display: inline-block;
+  padding: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-ul li a{
+  color: #fff;
+  padding: 5px;
+  text-decoration: none;
 }
+.nav-ul{
+  padding: 5px;
+  margin: none;
+  background-color: skyblue;
+}
+.nav-ul-right{
+  text-align: right;
+}
+.logo{
+  width: 65px;
+  float:left;
+  border-radius: 50%;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+.footer{
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  background-color: skyblue;
+}
+.login{
+  margin-left: 30%;
+  margin-top: 100px;
+}
+.register,.product{
+  margin-left: 30%;
+}
+.inputbox{
+  display: block;
+  margin: 25px;
+  padding: 7px;
+  width: 300px;
+  border: 1px solid skyblue;
+}
+.invalid-field{
+  color: red;
+  display: block;
+  margin-top: -20px;
+  margin-left: 25px;
+}
+.product-list{
+  text-align: center;
+  margin-top: 50px;
+}
+.search-product-box{
+  width: 400px;
+  margin: 20px;
+  height: 40px;
+  border: 1px solid skyblue;
+  padding-left: 20px;
+}
+.product-list ul li {
+  display: inline-block;
+  border: 1px solid skyblue;
+  width: 150px;
+  padding: 5px;
+}
+.product-list ul {
+  margin: 0;
+}
+.appButton{
+  margin: 25px;
+  padding: 10px;
+  width: 150px;
+  background-color: skyblue;
+  border: 1px solid;
+  cursor: pointer;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
