@@ -1,19 +1,27 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import { authAction } from "./reducer/auth";
 
 const SingUp = ()=> {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const auth = useSelector((state)=>state.auth.auth);
 
     useEffect(()=>{
-        const auth = localStorage.getItem('user');
+        // const auth = localStorage.getItem('user');
         if(auth){
             navigate("/");
         }
-    }, []);
+    },[]);
+
+    const setAuthentication = (key) => {
+        dispatch(authAction(key));
+    }
 
    const collectData = () => {
         axios.post('http://localhost:5000/register',{
@@ -28,7 +36,9 @@ const SingUp = ()=> {
         }).then((res)=> {
             if(res.data.auth){
                 localStorage.setItem('user',JSON.stringify(res.data.result));
-                localStorage.setItem('token',JSON.stringify(res.data.auth));
+                // localStorage.setItem('token',JSON.stringify(res.data.auth));
+                setAuthentication(res.data.result);
+
                 navigate("/");
             }
         });

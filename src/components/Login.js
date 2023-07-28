@@ -1,18 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authAction } from "./reducer/auth";
 
 const Login = ()=> {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigate = useNavigate();
+    const auth = useSelector((state)=>state.auth.auth);
+    const dispatch = useDispatch();
     useEffect(()=>{
-        const auth = localStorage.getItem('token');
+        // const auth = localStorage.getItem('token');
         if(auth){
             navigate('/');
         }
 
-    },[]);
+    }, []);
+    const setAuthentication = (key) => {
+        console.log(key)
+        dispatch(authAction.setUser(key));
+    }
     const handlelogin = async ()=> {
         const result = await axios.post('http://localhost:5000/login',{
             body:{
@@ -25,7 +34,8 @@ const Login = ()=> {
         });
         if (result.data.auth) {
             localStorage.setItem('user',JSON.stringify(result.data.result));
-            localStorage.setItem('token',JSON.stringify(result.data.auth));
+            // localStorage.setItem('token',JSON.stringify(result.data.auth));
+            setAuthentication(result.data.auth);
             navigate("/");
         }else{
             console.log(result.data);

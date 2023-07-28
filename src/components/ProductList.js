@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const ProductList = () => {
     const [products, setProducts] = useState("");
+    const auth = useSelector((state)=>state.auth.auth);
     useEffect(() => {
         getProducts();
     }, []);
     const getProducts = () => {
         axios.get('http://localhost:5000/products',{
-            headers:{authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`}
+            headers:{authorization: `bearer ${auth}`}
         }).then((result) => {
             setProducts(result.data);
         }).catch((error) => {
@@ -19,7 +21,7 @@ const ProductList = () => {
     }
     const deleteItem = (id) => {
         axios.delete(`http://localhost:5000/product/${id}`,{
-            headers:{authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`}
+            headers:{authorization: `bearer ${auth}`}
         }).then((res) => {
             alert(res.data.result);
             getProducts();
@@ -30,7 +32,7 @@ const ProductList = () => {
         const item = event.target.value;
         if (item){
         axios.get(`http://localhost:5000/search/${item}`,{
-            headers:{authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`}
+            headers:{authorization: `bearer ${auth}`}
         }).then((result)=>{
          const res = result.data;
          setProducts(res);
